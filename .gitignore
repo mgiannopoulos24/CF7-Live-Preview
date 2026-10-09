@@ -1,0 +1,15 @@
+# VSCode
+.vscode/
+
+# Dev dependencies
+node_modules/
+vendor/
+
+# Tests
+tests/test-results/
+tests/playwright-report/
+tests/blob-report/
+tests/**/.cache/
+
+# Build
+build/

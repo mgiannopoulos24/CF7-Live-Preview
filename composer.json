@@ -1,0 +1,25 @@
+{
+    "name": "vendor-name/plugin-name",
+    "description": "...",
+    "type": "wordpress-plugin",
+    "license": "...",
+    "authors": [
+        {
+            "name": "...",
+            "email": "...",
+            "homepage": "..."
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "*",
+		"brain/monkey": "*",
+		"yoast/phpunit-polyfills": "*",
+		"mockery/mockery": "*",
+		"phpstan/phpstan": "*",
+		"szepeviktor/phpstan-wordpress": "*",
+		"php-stubs/woocommerce-stubs": "*",
+		"squizlabs/php_codesniffer": "*",
+        "wp-coding-standards/wpcs": "*"
+    }
+}

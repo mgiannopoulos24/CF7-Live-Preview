@@ -1,0 +1,33 @@
+{
+    "name": "plugin-name",
+    "description": "...",
+    "homepage": "...",
+    "version": "...",
+    "scripts": {
+        "start": "wp-env start",
+        "stop": "wp-env stop",
+        "destroy": "wp-env destroy",
+        "shell": "wp-env run cli /bin/bash",
+        "lint": "./vendor/bin/phpcs --standard=phpcs.xml --extensions=php .",
+        "lint:fix": "./vendor/bin/phpcbf --standard=phpcs.xml --extensions=php .",
+        "test:php": "./vendor/bin/phpunit",
+        "analyze:php": "./vendor/bin/phpstan",
+        "test:e2e:install":"bunx playwright install chromium",
+        "test:e2e": "bunx playwright test --config tests/e2e-pw/playwright.config.ts",
+        "i18n:lang": "./scripts/i18n-lang.sh",
+        "bundle": "mkdir -p build/ bunx bestzip plugin-name.zip plugin-name.php uninstall.php readme.txt"
+      },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/.../plugin-name.git"
+    },
+    "keywords": [
+      "wordpress-plugin"
+    ],
+    "author": "...",
+    "license": "...",
+    "bugs": {
+      "url": "..."
+    },
+    "devDependencies": {}
+  }
