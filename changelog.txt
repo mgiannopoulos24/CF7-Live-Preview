@@ -1,0 +1,10 @@
+== Changelog ==
+
+= 1.0.0 =
+* Initial release.
+* Form preview: the form from the editor, unsaved, styled by the theme, at mobile, tablet or full width.
+* Validation testing: submit the previewed form to see Contact Form 7's own validation messages, including unsaved Messages-tab edits. Nothing is stored or sent.
+* Email preview: Mail or Mail (2) composed with editable sample values. Nothing is sent.
+* Works with add-ons that change a form's markup or validation, including unsaved Conditional Fields conditions.
+* Settings: background colour of the form preview and the width it opens at.
+* `cf7lp_enqueue_preview_assets` action, for themes that load form CSS only on certain pages.

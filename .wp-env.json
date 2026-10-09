@@ -1,8 +1,19 @@
 {
   "core": null,
-  "phpVersion": "...",
-  "themes": ["..."],
-  "plugins": [".", "..."],
+  "phpVersion": "8.3",
+  "themes": [
+    "WordPress/twentytwentyfive",
+    "https://downloads.wordpress.org/theme/twentytwentyone.zip"
+  ],
+  "plugins": [
+    "https://downloads.wordpress.org/plugin/contact-form-7.zip",
+    "https://downloads.wordpress.org/plugin/cf7-conditional-fields.zip",
+    "https://downloads.wordpress.org/plugin/contact-form-7-multi-step-module.zip",
+    "https://downloads.wordpress.org/plugin/ultimate-addons-for-contact-form-7.zip"
+  ],
+  "mappings": {
+    "wp-content/plugins/cf7-live-preview": "."
+  },
   "port": 8888,
   "testsEnvironment": false,
   "config": {
@@ -12,5 +23,8 @@
     "SCRIPT_DEBUG": true,
     "WP_ENVIRONMENT_TYPE": "local",
     "DISALLOW_FILE_EDIT": false
+  },
+  "lifecycleScripts": {
+    "afterStart": "wp-env run cli wp plugin activate cf7-live-preview && wp-env run cli wp plugin deactivate cf7-conditional-fields contact-form-7-multi-step-module ultimate-addons-for-contact-form-7 && wp-env run cli wp theme activate twentytwentyfive"
   }
 }

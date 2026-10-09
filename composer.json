@@ -1,25 +1,30 @@
 {
-    "name": "vendor-name/plugin-name",
-    "description": "...",
+    "name": "mgiannopoulos24/cf7-live-preview",
+    "description": "Preview a Contact Form 7 form and its email from the editor, with your theme's styles and without saving.",
     "type": "wordpress-plugin",
-    "license": "...",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
-            "name": "...",
-            "email": "...",
-            "homepage": "..."
+            "name": "Marios Giannopoulos",
+            "email": "mariosgian_2002@yahoo.gr",
+            "homepage": "https://github.com/mgiannopoulos24"
         }
     ],
-    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.3"
+    },
     "require-dev": {
-        "phpunit/phpunit": "*",
-		"brain/monkey": "*",
-		"yoast/phpunit-polyfills": "*",
-		"mockery/mockery": "*",
-		"phpstan/phpstan": "*",
-		"szepeviktor/phpstan-wordpress": "*",
-		"php-stubs/woocommerce-stubs": "*",
-		"squizlabs/php_codesniffer": "*",
-        "wp-coding-standards/wpcs": "*"
-    }
+        "squizlabs/php_codesniffer": "^3.11",
+        "wp-coding-standards/wpcs": "^3.1"
+    },
+    "config": {
+        "platform": {
+            "php": "8.3"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

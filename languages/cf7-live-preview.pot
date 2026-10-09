@@ -1,0 +1,287 @@
+# Copyright (C) 2026 Marios Giannopoulos
+# This file is distributed under the GNU General Public License v3 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: CF7 Live Preview 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cf7-live-preview\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-09T20:02:44+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: cf7-live-preview\n"
+
+#. Plugin Name of the plugin
+#: cf7-live-preview.php
+#: includes/class-cf7-live-preview-settings.php:106
+#: includes/class-cf7-live-preview-settings.php:107
+msgid "CF7 Live Preview"
+msgstr ""
+
+#. Description of the plugin
+#: cf7-live-preview.php
+msgid "Preview a Contact Form 7 form and its email from the editor, with your theme's styles and without saving."
+msgstr ""
+
+#. Author of the plugin
+#: cf7-live-preview.php
+msgid "Marios Giannopoulos"
+msgstr ""
+
+#. Author URI of the plugin
+#: cf7-live-preview.php
+msgid "https://github.com/mgiannopoulos24"
+msgstr ""
+
+#: includes/class-cf7-live-preview-admin.php:113
+msgid "CF7 Live Preview does not support the installed version of Contact Form 7, so the live preview is disabled."
+msgstr ""
+
+#: includes/class-cf7-live-preview-mail-renderer.php:88
+#: includes/class-cf7-live-preview-renderer.php:96
+#: includes/class-cf7-live-preview-validator.php:98
+msgid "This version of Contact Form 7 is not supported by CF7 Live Preview."
+msgstr ""
+
+#. translators: %s: error message
+#: includes/class-cf7-live-preview-mail-renderer.php:113
+#, php-format
+msgid "The email could not be composed: %s"
+msgstr ""
+
+#: includes/class-cf7-live-preview-mail-renderer.php:208
+msgid ""
+"Hello,\n"
+"This is a sample message written for the preview."
+msgstr ""
+
+#: includes/class-cf7-live-preview-mail-renderer.php:212
+msgid "Option 1"
+msgstr ""
+
+#: includes/class-cf7-live-preview-mail-renderer.php:226
+msgid "A question about your services"
+msgstr ""
+
+#: includes/class-cf7-live-preview-mail-renderer.php:233
+msgid "Sample text"
+msgstr ""
+
+#: includes/class-cf7-live-preview-mail-renderer.php:348
+msgid "Contact"
+msgstr ""
+
+#: includes/class-cf7-live-preview-preview-frame.php:111
+msgid "Sorry, you are not allowed to preview contact forms."
+msgstr ""
+
+#. translators: %s: error message
+#: includes/class-cf7-live-preview-renderer.php:116
+#, php-format
+msgid "The form could not be rendered: %s"
+msgstr ""
+
+#: includes/class-cf7-live-preview-rest.php:71
+#: includes/class-cf7-live-preview-rest.php:101
+msgid "Form template markup."
+msgstr ""
+
+#: includes/class-cf7-live-preview-rest.php:76
+#: includes/class-cf7-live-preview-rest.php:133
+msgid "Locale of the form being edited."
+msgstr ""
+
+#: includes/class-cf7-live-preview-rest.php:82
+msgid "Unsaved settings of CF7 add-ons that the form depends on."
+msgstr ""
+
+#: includes/class-cf7-live-preview-rest.php:106
+msgid "Mail template, as in the Mail tab."
+msgstr ""
+
+#: includes/class-cf7-live-preview-rest.php:122
+msgid "Sample values by field name."
+msgstr ""
+
+#: includes/class-cf7-live-preview-rest.php:128
+msgid "Title of the form being edited."
+msgstr ""
+
+#: includes/class-cf7-live-preview-rest.php:177
+msgid "The preview did not send its form template."
+msgstr ""
+
+#: includes/class-cf7-live-preview-rest.php:189
+msgid "There is no valid unit tag."
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:43
+msgid "Mobile (375px)"
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:44
+msgid "Tablet (768px)"
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:45
+msgid "Full width"
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:130
+#: assets/js/admin-preview.js:317
+msgid "Form preview"
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:134
+msgid "How the \"Preview form\" window looks when it opens."
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:142
+msgid "Background colour"
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:151
+msgid "Opens at"
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:195
+msgid "A hex colour behind the form, such as #f6f7f7. Leave empty to use the theme's background."
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:220
+msgid "Until someone picks a width in the preview; their choice is then remembered in their browser."
+msgstr ""
+
+#: includes/class-cf7-live-preview-settings.php:257
+msgid "Settings"
+msgstr ""
+
+#. translators: %s: error message
+#: includes/class-cf7-live-preview-validator.php:132
+#, php-format
+msgid "The preview could not validate the form: %s"
+msgstr ""
+
+#: includes/class-cf7-live-preview.php:99
+msgid "CF7 Live Preview requires Contact Form 7 to be installed and activated."
+msgstr ""
+
+#: templates/preview-frame.php:31
+msgid "Preview"
+msgstr ""
+
+#: assets/js/admin-preview.js:31
+msgid "Mobile"
+msgstr ""
+
+#: assets/js/admin-preview.js:32
+msgid "Tablet"
+msgstr ""
+
+#: assets/js/admin-preview.js:34
+msgid "Full"
+msgstr ""
+
+#: assets/js/admin-preview.js:247
+msgid "Close"
+msgstr ""
+
+#: assets/js/admin-preview.js:314
+msgid "Refresh"
+msgstr ""
+
+#: assets/js/admin-preview.js:324
+msgid "Contact form preview"
+msgstr ""
+
+#: assets/js/admin-preview.js:352
+msgid "Preview width"
+msgstr ""
+
+#: assets/js/admin-preview.js:386
+#: assets/js/admin-preview.js:635
+msgid "Updating…"
+msgstr ""
+
+#: assets/js/admin-preview.js:406
+msgid "The form could not be rendered."
+msgstr ""
+
+#: assets/js/admin-preview.js:411
+msgid "The preview could not be updated."
+msgstr ""
+
+#: assets/js/admin-preview.js:449
+msgid "Preview form"
+msgstr ""
+
+#: assets/js/admin-preview.js:468
+msgid "The preview needs the site and its admin on the same address."
+msgstr ""
+
+#: assets/js/admin-preview.js:480
+msgid "Mail"
+msgstr ""
+
+#: assets/js/admin-preview.js:481
+msgid "Mail (2)"
+msgstr ""
+
+#: assets/js/admin-preview.js:485
+msgid "Email preview"
+msgstr ""
+
+#: assets/js/admin-preview.js:495
+msgid "Reset to defaults"
+msgstr ""
+
+#: assets/js/admin-preview.js:498
+msgid "Sample values"
+msgstr ""
+
+#: assets/js/admin-preview.js:501
+msgid "The email is filled with these values instead of a real submission. Edit them to try other inputs."
+msgstr ""
+
+#: assets/js/admin-preview.js:521
+msgid "Mail template"
+msgstr ""
+
+#: assets/js/admin-preview.js:554
+msgid "From"
+msgstr ""
+
+#: assets/js/admin-preview.js:555
+msgid "To"
+msgstr ""
+
+#: assets/js/admin-preview.js:556
+msgid "Subject"
+msgstr ""
+
+#: assets/js/admin-preview.js:568
+msgid "Attachments"
+msgstr ""
+
+#: assets/js/admin-preview.js:578
+msgid "Email body"
+msgstr ""
+
+#: assets/js/admin-preview.js:606
+msgid "This form has no fields to fill in."
+msgstr ""
+
+#: assets/js/admin-preview.js:666
+msgid "The email preview could not be updated."
+msgstr ""
+
+#: assets/js/admin-preview.js:680
+msgid "Preview email"
+msgstr ""
+
+#: assets/js/admin-preview.js:690
+msgid "Mail (2) is not in use. Tick \"Use Mail (2)\" in the Mail tab to preview it."
+msgstr ""

@@ -6,9 +6,10 @@ node_modules/
 vendor/
 
 # Tests
-tests/test-results/
-tests/playwright-report/
-tests/blob-report/
+tests/**/test-results
+tests/**/playwright-report
+tests/**/blob-report
+tests/**/.auth
 tests/**/.cache/
 
 # Build

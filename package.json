@@ -1,33 +1,34 @@
 {
-    "name": "plugin-name",
-    "description": "...",
-    "homepage": "...",
-    "version": "...",
-    "scripts": {
-        "start": "wp-env start",
-        "stop": "wp-env stop",
-        "destroy": "wp-env destroy",
-        "shell": "wp-env run cli /bin/bash",
-        "lint": "./vendor/bin/phpcs --standard=phpcs.xml --extensions=php .",
-        "lint:fix": "./vendor/bin/phpcbf --standard=phpcs.xml --extensions=php .",
-        "test:php": "./vendor/bin/phpunit",
-        "analyze:php": "./vendor/bin/phpstan",
-        "test:e2e:install":"bunx playwright install chromium",
-        "test:e2e": "bunx playwright test --config tests/e2e-pw/playwright.config.ts",
-        "i18n:lang": "./scripts/i18n-lang.sh",
-        "bundle": "mkdir -p build/ bunx bestzip plugin-name.zip plugin-name.php uninstall.php readme.txt"
-      },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/.../plugin-name.git"
-    },
-    "keywords": [
-      "wordpress-plugin"
-    ],
-    "author": "...",
-    "license": "...",
-    "bugs": {
-      "url": "..."
-    },
-    "devDependencies": {}
+  "name": "cf7-live-preview",
+  "version": "1.0.0",
+  "description": "Preview a Contact Form 7 form and its email from the editor, with your theme's styles and without saving.",
+  "author": "Marios Giannopoulos",
+  "license": "GPL-3.0-or-later",
+  "keywords": ["wordpress", "plugin", "contact-form-7", "cf7", "live-preview", "form-builder", "preview"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgiannopoulos24/CF7-Live-Preview"
+  },
+  "scripts": {
+    "start": "wp-env start",
+    "stop": "wp-env stop",
+    "destroy": "wp-env destroy",
+    "shell": "wp-env run cli /bin/bash",
+    "compat:on": "wp-env run cli wp plugin activate cf7-conditional-fields contact-form-7-multi-step-module ultimate-addons-for-contact-form-7",
+    "compat:off": "wp-env run cli wp plugin deactivate cf7-conditional-fields contact-form-7-multi-step-module ultimate-addons-for-contact-form-7",
+    "lint": "./vendor/bin/phpcs --standard=phpcs.xml --extensions=php .",
+    "lint:fix": "./vendor/bin/phpcbf --standard=phpcs.xml --extensions=php .",
+    "test:e2e:install": "playwright install chromium",
+    "test:e2e": "playwright test --config tests/e2e-pw/playwright.config.ts",
+    "test:e2e:report": "playwright show-report tests/e2e-pw/playwright-report",
+    "i18n:make-pot": "wp-env run cli -- wp i18n make-pot wp-content/plugins/cf7-live-preview wp-content/plugins/cf7-live-preview/languages/cf7-live-preview.pot --slug=cf7-live-preview --domain=cf7-live-preview --exclude=node_modules,vendor,.git,languages,tests",
+    "i18n": "bun run i18n:make-pot",
+    "bundle": "mkdir -p build && bestzip build/cf7-live-preview.zip cf7-live-preview.php includes/ templates/ assets/js/ assets/css/ languages/ uninstall.php readme.txt changelog.txt LICENSE"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.4",
+    "@wordpress/env": "^11.15.0",
+    "bestzip": "^4.0.0"
   }
+}

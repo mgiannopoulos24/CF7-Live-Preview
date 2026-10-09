@@ -1,52 +1,64 @@
 <?xml version="1.0"?>
-<ruleset name="Plugin-Name">
+<ruleset name="CF7LivePreviewPHPCSRuleset">
 
-	<description>PHPCS configuration for {plugin}</description>
+	<description>CF7 Live Preview rules for PHP CodeSniffer</description>
 
 	<file>.</file>
 
 	<!-- Exclude files -->
 	<exclude-pattern>*/vendor/*</exclude-pattern>
-	<exclude-pattern>*/tests/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>*/languages/*</exclude-pattern>
+	<exclude-pattern>*/build/*</exclude-pattern>
 
-	 <!-- Only check PHP files. -->
-	<arg name="extensions" value="php"/>
+	<!-- Only check PHP files. -->
+	<arg name="extensions" value="php" />
 
 	<!-- Show progress, show the error codes for each message (source). -->
-	<arg value="ps"/>
+	<arg value="ps" />
 
 	<!-- Add colors. -->
-    <arg name="colors"/>
+	<arg name="colors"/>
+
+	<!-- Check up to 8 files simultaneously. -->
+	<arg name="parallel" value="8"/>
 
 	<!-- Configs -->
-	<!-- <config name="minimum_supported_wp_version" value="6.5" /> -->
-	<!-- <config name="testVersion" value="7.4-" /> -->
-	
-	<!-- See https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml -->
-	<!-- See https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/blob/develop/WordPress/ruleset.xml -->
-	<!-- Include the WordPress ruleset, with exclusions. -->
+	<config name="minimum_supported_wp_version" value="6.5" />
+	<config name="testVersion" value="8.3-" />
 
+	<!-- Rules -->
 	<rule ref="WordPress">
-		<!-- Maybe exclude some -->
+		<!--
+		We may want a middle ground though. The best way to do this is add the
+		entire ruleset, then rule by rule, remove ones that don't suit a project.
+		Once we know the sniff names, we can opt to exclude sniffs which don't
+		suit our project like so.
+		-->
 	</rule>
 
-	<!-- If using WooCommerce -->
-	<!-- <rule ref="WordPress.WP.Capabilities">
+	<!-- Let's also check that everything is properly documented. -->
+	<rule ref="WordPress-Docs"/>
+
+	<!-- Add in some extra rules from other standards. -->
+	<rule ref="Generic.Commenting.Todo"/>
+
+	<!-- Capabilities registered by Contact Form 7 (includes/capabilities.php). -->
+	<rule ref="WordPress.WP.Capabilities">
 		<properties>
 			<property name="custom_capabilities" type="array">
-				<element key="0" value="manage_woocommerce"/>
+				<element value="wpcf7_edit_contact_forms"/>
 			</property>
 		</properties>
-	</rule> -->
+	</rule>
 
-	<!-- Internationalization -->
-	<!-- <rule ref="WordPress.WP.I18n">
+	<!-- Text Domain -->
+	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="{plugin-domain}" />
+				<element value="cf7-live-preview"/>
 			</property>
 		</properties>
-	</rule> -->
-
+	</rule>
 </ruleset>

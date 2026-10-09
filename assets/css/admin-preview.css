@@ -1,0 +1,395 @@
+/**
+ * CF7 Live Preview — preview modals on the Contact Form 7 editor.
+ */
+
+/*
+ * Triggers right after the Form and Mail headings, as WordPress places
+ * "Add New" after a page title. Not in the panel's top-right corner:
+ * add-ons put their own controls there (Ultra Addons pins an absolutely
+ * positioned "Addons Settings" button to it, which covered this one).
+ */
+
+.cf7lp-trigger-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 8px 16px;
+}
+
+.cf7lp-trigger.button,
+.cf7lp-modal-header .button {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.cf7lp-label {
+	line-height: 16px;
+	/*
+	 * Trim the line box to cap height and baseline, so centring the box
+	 * centres the letters themselves; otherwise the font's ascent/descent
+	 * leave them visibly higher than the icon beside them.
+	 */
+	text-box: trim-both cap alphabetic;
+}
+
+/* Beats .wp-core-ui .button .dashicons, whose line-height drops the glyph. */
+.wp-core-ui .cf7lp-trigger .dashicons,
+.wp-core-ui .cf7lp-modal-header .button .dashicons,
+.cf7lp-trigger .dashicons::before,
+.cf7lp-modal-header .button .dashicons::before {
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	font-size: 16px;
+	line-height: 1;
+	vertical-align: top;
+}
+
+/*
+ * The glyph as a block filling its box: inline, it sits on the font
+ * baseline and lands lower than the box centre.
+ */
+.cf7lp-trigger .dashicons::before,
+.cf7lp-modal-header .button .dashicons::before,
+.cf7lp-pill .dashicons::before {
+	display: block;
+}
+
+/*
+ * Optical alignment. Dashicons glyphs sit at different heights inside
+ * their em box, so a centred box doesn't put the drawn icon level with the
+ * letters. Offsets measured from rendered pixels against the label's ink.
+ */
+.cf7lp-trigger .dashicons-visibility {
+	translate: 0 -1.5px;
+}
+
+.cf7lp-trigger .dashicons-email-alt {
+	translate: 0 -0.67px;
+}
+
+.cf7lp-pill .dashicons {
+	translate: 0 -0.5px;
+}
+
+/*
+ * Modal shell
+ */
+
+.cf7lp-modal {
+	box-sizing: border-box;
+	width: min(1100px, calc(100vw - 32px));
+	max-width: none;
+	height: calc(100vh - 64px);
+	max-height: none;
+	padding: 0;
+	border: 0;
+	border-radius: 8px;
+	background: #fff;
+	color: #1e1e1e;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.cf7lp-mail-modal {
+	width: min(860px, calc(100vw - 32px));
+}
+
+.cf7lp-modal[open] {
+	display: flex;
+	flex-direction: column;
+	animation: cf7lp-modal-in 0.2s ease-out;
+}
+
+.cf7lp-modal::backdrop {
+	background: rgba(0, 0, 0, 0.55);
+}
+
+@keyframes cf7lp-modal-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.99);
+	}
+}
+
+.cf7lp-modal-header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 12px 12px 20px;
+	border-bottom: 1px solid #dcdcde;
+}
+
+.cf7lp-modal-title {
+	margin: 0 auto 0 0;
+	font-size: 16px;
+	line-height: 1.4;
+}
+
+.cf7lp-modal-close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	border: 0;
+	border-radius: 4px;
+	background: transparent;
+	color: #d63638;
+	cursor: pointer;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.cf7lp-modal-close:hover {
+	background: #fcf0f1;
+	color: #b32d2e;
+}
+
+.cf7lp-modal-close:focus-visible {
+	outline: 2px solid #d63638;
+	outline-offset: 1px;
+}
+
+.cf7lp-modal-close .dashicons,
+.cf7lp-modal-close .dashicons::before {
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	line-height: 1;
+}
+
+.cf7lp-modal-body {
+	flex: 1 1 auto;
+	overflow: auto;
+	padding: 20px;
+	background: #f0f0f1;
+}
+
+.cf7lp-modal-footer {
+	display: flex;
+	justify-content: center;
+	padding: 10px 16px;
+	border-top: 1px solid #dcdcde;
+	background: #fff;
+}
+
+.cf7lp-status {
+	margin: 0;
+	padding: 6px 20px;
+	border-bottom: 1px solid #dcdcde;
+	color: #646970;
+	font-size: 12px;
+}
+
+.cf7lp-status:empty {
+	display: none;
+}
+
+.cf7lp-status.is-error {
+	background: #fcf0f1;
+	color: #8a2424;
+}
+
+/*
+ * Form preview
+ */
+
+.cf7lp-stage {
+	margin: 0 auto;
+	overflow: hidden;
+	background: #fff;
+	box-shadow: 0 0 0 1px #dcdcde, 0 2px 6px rgba(0, 0, 0, 0.05);
+	transition: width 0.3s ease, height 0.3s ease;
+}
+
+.cf7lp-iframe {
+	display: block;
+	border: 0;
+	transform-origin: 0 0;
+	transition: width 0.3s ease, transform 0.3s ease;
+}
+
+/*
+ * Pill switcher
+ */
+
+.cf7lp-pill {
+	position: relative;
+	display: inline-flex;
+	gap: 2px;
+	padding: 3px;
+	border-radius: 999px;
+	background: #fff;
+	box-shadow: 0 0 0 1px #dcdcde, 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.cf7lp-pill-indicator {
+	position: absolute;
+	top: 3px;
+	bottom: 3px;
+	left: 0;
+	border-radius: 999px;
+	background: #1e1e1e;
+}
+
+.cf7lp-pill button {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	padding: 4px 14px;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	color: #50575e;
+	font-size: 12px;
+	line-height: 20px;
+	cursor: pointer;
+}
+
+.cf7lp-pill button:hover:not([aria-disabled="true"]):not([aria-pressed="true"]) {
+	color: #1e1e1e;
+}
+
+.cf7lp-pill button:focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: 1px;
+}
+
+.cf7lp-pill button[aria-pressed="true"] {
+	color: #fff;
+}
+
+.cf7lp-pill button[aria-disabled="true"] {
+	color: #a7aaad;
+	cursor: not-allowed;
+}
+
+.cf7lp-pill .dashicons,
+.cf7lp-pill .dashicons::before {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+	line-height: 1;
+}
+
+/* Set once placed, so the first paint doesn't slide in from the left. */
+.cf7lp-pill.is-animated .cf7lp-pill-indicator {
+	transition: transform 0.25s ease, width 0.25s ease;
+}
+
+.cf7lp-pill.is-animated button {
+	transition: color 0.25s ease;
+}
+
+/*
+ * Email preview
+ */
+
+.cf7lp-mail {
+	overflow: hidden;
+	border-radius: 6px;
+	background: #fff;
+	box-shadow: 0 0 0 1px #dcdcde, 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.cf7lp-mail-headers {
+	display: grid;
+	grid-template-columns: max-content minmax(0, 1fr);
+	gap: 6px 16px;
+	margin: 0;
+	padding: 16px 20px;
+	border-bottom: 1px solid #dcdcde;
+	background: #f6f7f7;
+}
+
+.cf7lp-mail-headers dt {
+	color: #646970;
+	font-weight: 600;
+}
+
+.cf7lp-mail-headers dd {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+.cf7lp-mail-text {
+	margin: 0;
+	padding: 20px;
+	font-family: Consolas, Monaco, monospace;
+	font-size: 13px;
+	line-height: 1.6;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+/* Padding outside the email, so its own margins stay as a client shows them. */
+.cf7lp-mail-body:has( .cf7lp-mail-html ) {
+	padding: 12px;
+}
+
+.cf7lp-mail-html {
+	display: block;
+	width: 100%;
+	min-height: 120px;
+	border: 0;
+}
+
+.cf7lp-samples {
+	margin-top: 16px;
+	padding: 12px 16px;
+	border-radius: 6px;
+	background: #fff;
+	box-shadow: 0 0 0 1px #dcdcde;
+}
+
+.cf7lp-samples summary {
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.cf7lp-samples-list {
+	display: grid;
+	gap: 10px;
+	margin: 12px 0;
+}
+
+.cf7lp-sample {
+	display: grid;
+	grid-template-columns: minmax(120px, 200px) minmax(0, 1fr);
+	align-items: start;
+	gap: 12px;
+}
+
+.cf7lp-sample label {
+	padding-top: 6px;
+}
+
+.cf7lp-sample input,
+.cf7lp-sample textarea {
+	width: 100%;
+}
+
+@media (max-width: 600px) {
+	.cf7lp-sample {
+		grid-template-columns: 1fr;
+		gap: 4px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cf7lp-modal[open] {
+		animation: none;
+	}
+
+	.cf7lp-stage,
+	.cf7lp-iframe,
+	.cf7lp-modal-close,
+	.cf7lp-pill.is-animated .cf7lp-pill-indicator,
+	.cf7lp-pill.is-animated button {
+		transition: none;
+	}
+}
