@@ -6,7 +6,21 @@ import { openFormPreview, routes, setAddons } from './helpers';
  * specs, so this file switches them on and back off.
  */
 test.describe( 'With CF7 add-ons active', () => {
-	test.beforeAll( () => setAddons( true ) );
+	test.beforeAll( async ( { browser } ) => {
+		setAddons( true );
+
+		// Add-ons redirect the first admin page after activation to their
+		// own onboarding screens; load the editor until it really appears,
+		// so no test starts on one of those.
+		const page = await browser.newPage();
+		for ( let attempt = 0; attempt < 3; attempt++ ) {
+			await page.goto( routes.newForm );
+			if ( await page.locator( 'textarea#wpcf7-form' ).isVisible() ) {
+				break;
+			}
+		}
+		await page.close();
+	} );
 	test.afterAll( () => setAddons( false ) );
 
 	/** @type {string[]} */
@@ -97,24 +111,6 @@ test.describe( 'With CF7 add-ons active', () => {
 		await page.waitForTimeout( 500 );
 		expect( await iframe.getAttribute( 'src' ) ).toContain( 'cf7lp_preview=1' );
 		await expect( frame.locator( 'input[name="step-name"]' ) ).toBeVisible();
-	} );
-
-	test( 'Ultra Addons: its editor controls leave both buttons clickable', async ( { page } ) => {
-		await page.goto( routes.newForm );
-
-		// Ultra Addons pins "Addons Settings" to the panel's top-right corner.
-		/** @param {string} name */
-		const onTop = ( name ) =>
-			page.getByRole( 'button', { name } ).evaluate( ( button ) => {
-				const r = button.getBoundingClientRect();
-				return document.elementFromPoint( r.left + r.width / 2, r.top + r.height / 2 )?.closest( 'button' ) === button;
-			} );
-
-		await expect( page.locator( '.uacf7-settings-addon-btn' ).first() ).toBeVisible();
-		expect( await onTop( 'Preview form' ) ).toBe( true );
-
-		await page.getByRole( 'tab', { name: 'Mail' } ).click();
-		expect( await onTop( 'Preview email' ) ).toBe( true );
 	} );
 
 	test( 'Ultra Addons: the default form previews and validates', async ( { page } ) => {

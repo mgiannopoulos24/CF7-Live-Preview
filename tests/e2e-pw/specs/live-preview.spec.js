@@ -125,6 +125,34 @@ test.describe( 'Form preview', () => {
 		await expect( frame.locator( '.wpcf7 form' ) ).toHaveClass( /\bunaccepted\b/ );
 	} );
 
+	test( 'a control pinned to the panel\'s corner leaves both buttons clickable', async ( { page } ) => {
+		await page.goto( routes.newForm );
+
+		// What Ultra Addons for CF7 does: an absolutely positioned button in
+		// the panel's top-right corner, with its exact styles.
+		await page.evaluate( () => {
+			[ 'form-panel', 'mail-panel' ].forEach( ( id ) => {
+				const control = document.createElement( 'button' );
+				control.type = 'button';
+				control.textContent = 'Addons Settings';
+				control.className = 'button button-primary';
+				control.style.cssText = 'position:absolute;top:30px;right:20px;padding:10px 28px';
+				document.getElementById( id )?.append( control );
+			} );
+		} );
+
+		/** @param {string} name */
+		const onTop = ( name ) =>
+			page.getByRole( 'button', { name } ).evaluate( ( button ) => {
+				const r = button.getBoundingClientRect();
+				return document.elementFromPoint( r.left + r.width / 2, r.top + r.height / 2 )?.closest( 'button' ) === button;
+			} );
+
+		expect( await onTop( 'Preview form' ) ).toBe( true );
+		await page.getByRole( 'tab', { name: 'Mail' } ).click();
+		expect( await onTop( 'Preview email' ) ).toBe( true );
+	} );
+
 	test( 'is not loaded on the contact form list', async ( { page } ) => {
 		await page.goto( routes.formList );
 		await expect( page.getByRole( 'button', { name: 'Preview form' } ) ).toHaveCount( 0 );
